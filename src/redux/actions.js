@@ -1,10 +1,12 @@
-import { EMPLOYEES_LOADED } from './constants';
+import EMPLOYEES_LOADED from "./constants";
 
-export const employeesLoaded = (employees) => {
+const employeesLoaded = employees => {
   return {
     type: EMPLOYEES_LOADED,
     payload: {
       employees
     }
   };
-}
+};
+
+export { employeesLoaded as default };

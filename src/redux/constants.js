@@ -1,1 +1,2 @@
-export const EMPLOYEES_LOADED = 'Employees/EMPLOYEES_LOADED';
+const EMPLOYEES_LOADED = "Employees/EMPLOYEES_LOADED";
+export { EMPLOYEES_LOADED as default };

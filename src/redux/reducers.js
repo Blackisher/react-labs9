@@ -1,7 +1,7 @@
-import { EMPLOYEES_LOADED } from './constants';
+import EMPLOYEES_LOADED from "./constants";
 
 export const initialState = {
-  employees: [],
+  employees: []
 };
 
 // Read this: https://redux.js.org/basics/reducers
@@ -11,11 +11,12 @@ const appReducer = (state = initialState, action) => {
     case EMPLOYEES_LOADED: {
       const { employees } = action.payload;
       // CAREFUL: You can't modify state variable directly.
-      return Object.assign({}, state, { employees });
+      // return Object.assign({}, state, { employees });
+      return { ...state, employees };
     }
     default:
-        return state
+      return state;
   }
-}
+};
 
 export default appReducer;
