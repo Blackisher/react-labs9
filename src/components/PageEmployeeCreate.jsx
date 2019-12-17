@@ -52,26 +52,25 @@ class PageEmployeeCreate extends React.Component {
       company,
       email
     };
-    //
-    // fetch("http://localhost:3004/employees", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Accept: "application/json"
-    //   },
-    //   body: JSON.stringify(employee)
-    // }).then(res => {
-    //   if (res.status !== 201) {
-    //     this.setState({
-    //       isSaving: false,
-    //       error: `Saving returned status ${res.status}`
-    //     });
-    //   } else {
-    this.props.workerAdded(worker);
-    this.props.history.push("/");
-    //   }
-    // }
-    // );
+
+    fetch("http://localhost:3004/employees", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(worker)
+    }).then(res => {
+      if (res.status !== 201) {
+        this.setState({
+          isSaving: false,
+          error: `Saving returned status ${res.status}`
+        });
+      } else {
+        this.props.workerAdded(worker);
+        this.props.history.push("/");
+      }
+    });
   }
 
   render() {
