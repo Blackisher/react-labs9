@@ -34,6 +34,8 @@ class PageEmployeesList extends React.Component {
 
   render() {
     const { isLoading } = this.state;
+    // the same as
+    // const { isLoading } = this.state.isLoading;
     const { employees } = this.props;
 
     if (isLoading) {
