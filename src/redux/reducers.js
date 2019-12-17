@@ -7,20 +7,22 @@ export const initialState = {
 
 // Read this: https://redux.js.org/basics/reducers
 
-const appReducer = (state = initialState, action) => {
+const appReducer = (obj = initialState, action) => {
   switch (action.type) {
     case EMPLOYEES_LOADED: {
-      const { employees } = action.payload;
-      // CAREFUL: You can't modify state variable directly.
-      // return Object.assign({}, state, { employees });
-      return { ...state, employees };
+      const { workers } = action.payload;
+      initialState.employees = workers;
+      const forDebug = Object.assign({}, obj, { workers });
+      return forDebug;
     }
     case WORKER_ADDED: {
       const { worker } = action.payload;
-      return { ...state, worker };
+      const forDebug = Object.assign({}, obj, { ...obj.employees, worker });
+      return forDebug;
+      // return { ...obj, employees: { ...obj.employees, worker } };
     }
     default:
-      return state;
+      return obj;
   }
 };
 

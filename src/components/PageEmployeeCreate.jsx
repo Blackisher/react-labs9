@@ -2,6 +2,8 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
+import { workerAdded } from "../redux/actions";
+
 class PageEmployeeCreate extends React.Component {
   constructor(props) {
     super(props);
@@ -43,31 +45,33 @@ class PageEmployeeCreate extends React.Component {
 
     const { name, age, company, email } = this.state;
 
-    const employee = {
+    const worker = {
       id: Date.now(),
       name,
       age,
       company,
       email
     };
-
-    fetch("http://localhost:3004/employees", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify(employee)
-    }).then(res => {
-      if (res.status !== 201) {
-        this.setState({
-          isSaving: false,
-          error: `Saving returned status ${res.status}`
-        });
-      } else {
-        this.props.history.push("/");
-      }
-    });
+    //
+    // fetch("http://localhost:3004/employees", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Accept: "application/json"
+    //   },
+    //   body: JSON.stringify(employee)
+    // }).then(res => {
+    //   if (res.status !== 201) {
+    //     this.setState({
+    //       isSaving: false,
+    //       error: `Saving returned status ${res.status}`
+    //     });
+    //   } else {
+    this.props.workerAdded(worker);
+    this.props.history.push("/");
+    //   }
+    // }
+    // );
   }
 
   render() {
@@ -125,11 +129,15 @@ class PageEmployeeCreate extends React.Component {
   }
 }
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = (state /* , ownProps */) => {
+  return {
+    worker: state
+  };
 };
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = dispatch => ({
+  workerAdded: employees => dispatch(workerAdded(employees))
+});
 
 export default connect(
   mapStateToProps,
