@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import employeesLoaded from "../redux/actions";
+import { employeesLoaded } from "../redux/actions";
 
 const EmployeeLine = ({ employee }) => (
   <div>
