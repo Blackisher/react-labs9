@@ -1,4 +1,9 @@
-import { EMPLOYEES_LOADED, WORKER_ADDED } from "./constants";
+import {
+  EMPLOYEES_LOADED,
+  WORKER_ADDED,
+  DATA_FETCHING_ERROR,
+  LAUNCH_DATA_FETCHING
+} from "./constants";
 
 const employeesLoaded = employees => {
   return {
@@ -18,4 +23,35 @@ const workerAdded = worker => {
   };
 };
 
-export { employeesLoaded, workerAdded };
+const employeesLoading = () => {
+  return {
+    type: LAUNCH_DATA_FETCHING
+  };
+};
+
+const employeesLoadError = error => {
+  return {
+    type: DATA_FETCHING_ERROR,
+    payload: {
+      error
+    }
+  };
+};
+
+function fetchData() {
+  return fetch("http://localhost:3004/employees").then(data => data.json());
+}
+
+export function fetchEmployees() {
+  return dispatch => {
+    dispatch(employeesLoading());
+    return fetchData()
+      .then(json => {
+        dispatch(employeesLoaded(json));
+        return json;
+      })
+      .catch(error => dispatch(employeesLoadError(error)));
+  };
+}
+
+export { employeesLoaded, workerAdded, employeesLoading, employeesLoadError };
