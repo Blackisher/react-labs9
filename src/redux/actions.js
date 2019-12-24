@@ -42,7 +42,7 @@ function fetchData() {
   return fetch("http://localhost:3004/employees").then(data => data.json());
 }
 
-export function fetchEmployees() {
+function fetchEmployees() {
   return dispatch => {
     dispatch(employeesLoading());
     return fetchData()
@@ -54,4 +54,10 @@ export function fetchEmployees() {
   };
 }
 
-export { employeesLoaded, workerAdded, employeesLoading, employeesLoadError };
+export {
+  employeesLoaded,
+  workerAdded,
+  employeesLoading,
+  employeesLoadError,
+  fetchEmployees
+};

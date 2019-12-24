@@ -26,6 +26,9 @@ const appReducer = (state = initialState, action) => {
       return { ...state, employees: tmp };
     }
     case LAUNCH_DATA_FETCHING: {
+      if (state.loadedOnce === true) {
+        return { ...state };
+      }
       return { ...state, isLoading: true, errorInfo: null };
     }
     case DATA_FETCHING_ERROR: {
