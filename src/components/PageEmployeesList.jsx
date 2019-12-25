@@ -21,7 +21,7 @@ class PageEmployeesList extends React.Component {
   }
 
   render() {
-    const { error, isLoading, employees } = this.props;
+    const { error, isLoading, employees, login } = this.props;
 
     if (isLoading) {
       return <p>Loading ...</p>;
@@ -33,6 +33,9 @@ class PageEmployeesList extends React.Component {
 
     return (
       <div>
+        {login && (
+          <div style={{ float: "right", color: "red" }}>{login.full_name}</div>
+        )}
         <h1>Employees List:</h1>
         {employees &&
           employees.map(employee => (
@@ -51,6 +54,7 @@ const mapStateToProps = (state /* , ownProps */) => {
     loadedOnce: state.loadedOnce,
     isloading: state.isloading,
     error: state.error,
+    login: state.login,
     employees: state.employees
   };
 };

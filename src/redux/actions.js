@@ -2,6 +2,7 @@ import {
   EMPLOYEES_LOADED,
   WORKER_ADDED,
   DATA_FETCHING_ERROR,
+  USER_LOGGED_IN,
   LAUNCH_DATA_FETCHING
 } from "./constants";
 
@@ -54,10 +55,20 @@ function fetchEmployees() {
   };
 }
 
+const loggedIn = login => {
+  return {
+    type: USER_LOGGED_IN,
+    payload: {
+      login
+    }
+  };
+};
+
 export {
   employeesLoaded,
   workerAdded,
   employeesLoading,
   employeesLoadError,
+  loggedIn,
   fetchEmployees
 };

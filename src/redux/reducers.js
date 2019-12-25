@@ -2,6 +2,7 @@ import {
   EMPLOYEES_LOADED,
   WORKER_ADDED,
   LAUNCH_DATA_FETCHING,
+  USER_LOGGED_IN,
   DATA_FETCHING_ERROR
 } from "./constants";
 
@@ -9,6 +10,7 @@ export const initialState = {
   loadedOnce: false,
   errorInfo: null,
   loading: false,
+  login: null,
   employees: []
 };
 
@@ -34,6 +36,10 @@ const appReducer = (state = initialState, action) => {
     case DATA_FETCHING_ERROR: {
       const errorInfo = action.payload.error;
       return { ...state, isLoading: false, errorInfo, employees: [] };
+    }
+    case USER_LOGGED_IN: {
+      const { login } = action.payload;
+      return { ...state, login };
     }
     default:
       return state;
