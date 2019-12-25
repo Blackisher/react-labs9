@@ -68,7 +68,7 @@ class PageEmployeeCreate extends React.Component {
         });
       } else {
         this.props.workerAdded(worker);
-        this.props.history.push("/");
+        this.props.history.push("/list");
       }
     });
   }
